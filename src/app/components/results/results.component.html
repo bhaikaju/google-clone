@@ -1,0 +1,68 @@
+<div class="container">
+  <header class="top-header">
+    <div class="top-header__left">
+      <img alt="logo" routerLink="/" src="assets/google_logo.png" style="cursor: pointer;">
+      <div class="top-header__left__search">
+        <div class="top-header__left__search-input">
+          <form #form="ngForm" (ngSubmit)="search(form)">
+            <app-search iconRight="true" [currentTermValue]="term"></app-search>
+          </form>
+        </div>
+        <div class="top-header__left__search-options">
+          <div class="top-header__left__search-options-left">
+            <div class="active">
+              <mat-icon>search</mat-icon>
+              <a href="">All</a>
+            </div>
+            <div>
+              <mat-icon>description</mat-icon>
+              <a href="">News</a>
+            </div>
+            <div>
+              <mat-icon>image</mat-icon>
+              <a href="">Images</a>
+            </div>
+            <div>
+              <mat-icon> local_offer</mat-icon>
+              <a href="">Shopping</a>
+            </div>
+            <div>
+              <mat-icon>room</mat-icon>
+              <a href="">Maps</a>
+            </div>
+            <div>
+              <mat-icon>more_vert</mat-icon>
+              <a href="">More</a>
+            </div>
+          </div>
+          <div class="top-header__left__search-options-right">
+            <a href="">Settings</a>
+            <a href="">Tools</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="top-header__right">
+      <mat-icon>apps</mat-icon>
+      <button>Sign in</button>
+    </div>
+  </header>
+
+  <main class="search_results" *ngIf="results?.items.length > 0">
+
+    <div class="search_results_header">
+      <p>About {{results?.searchInformation?.formattedTotalResults }} results
+        ({{ results?.searchInformation?.formattedSearchTime }} seconds)</p>
+    </div>
+    <ng-container *ngFor="let r of results?.items">
+      <div class="search_results_body">
+        <a class="search_results_body-link" href="{{ r?.formattedUrl }}" target="_blank">{{ r?.formattedUrl }}</a>
+        <a class="search_results_body-heading" href="{{ r?.formattedUrl }}" target="_blank"><h2>{{ r?.title }}</h2>
+        </a>
+        <div class="search_results_body-details">{{  r?.snippet}}</div>
+      </div>
+    </ng-container>
+
+  </main>
+
+</div>
